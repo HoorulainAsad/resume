@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getCertifications, saveCertifications } from '../utils/persistence'
 import { useAdmin } from '../context/AdminContext'
+import { getAssetPath } from '../utils/assets'
 
 export default function Certifications() {
     const [certsList, setCertsList] = useState([])
@@ -118,8 +119,8 @@ export default function Certifications() {
                             <div key={cert.id} className="cert-card-linkedin" style={{ position: 'relative' }}>
                                 <div className="cert-thumbnail">
                                     {cert.image ? (
-                                        <a href={cert.image} target="_blank" rel="noopener noreferrer">
-                                            <img src={cert.image} alt={cert.title} className="cert-preview-img" />
+                                        <a href={getAssetPath(cert.image)} target="_blank" rel="noopener noreferrer">
+                                            <img src={getAssetPath(cert.image)} alt={cert.title} className="cert-preview-img" />
                                         </a>
                                     ) : (
                                         <div className="placeholder-logo">
@@ -132,7 +133,7 @@ export default function Certifications() {
                                     <p className="issuer">{cert.issuer}</p>
                                     <p className="date">Issued {cert.date}</p>
                                     <div className="cert-actions-btns">
-                                        <a href={cert.image || cert.link} target="_blank" rel="noopener noreferrer" className="view-credential-btn">
+                                        <a href={getAssetPath(cert.image || cert.link)} target="_blank" rel="noopener noreferrer" className="view-credential-btn">
                                             View Certificate
                                         </a>
                                     </div>

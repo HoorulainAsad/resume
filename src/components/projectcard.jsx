@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { getAssetPath } from '../utils/assets'
 
 export default function ProjectCard({ project }) {
   // Fallback if data is missing
@@ -17,7 +18,7 @@ export default function ProjectCard({ project }) {
       {/* 1. Image Area (User to customize) */}
       <div className="project-image-area">
         {image ? (
-          <img src={image} alt={title} />
+          <img src={getAssetPath(image)} alt={title} />
         ) : (
           <span>Project Preview</span>
         )}
