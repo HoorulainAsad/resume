@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="hero section">
       <div className="photo-container">
-        <img src="/assets/profile.jpeg" alt="Profile" className="photo" />
+        <img src={`${import.meta.env.BASE_URL}assets/profile.jpeg`} alt="Profile" className="photo" />
       </div>
       <div className="intro">
         <h1>Hoorulain Asad</h1>
