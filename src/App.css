@@ -100,6 +100,56 @@ body {
   padding: 8px 16px;
 }
 
+/* Hamburger Menu Toggle - Hidden on Desktop */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 200;
+}
+
+.hamburger {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-main);
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-main);
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger::before {
+  transform: translateY(-8px);
+}
+
+.hamburger::after {
+  transform: translateY(8px);
+}
+
+/* Animate Hamburger to X */
+.hamburger.open {
+  background-color: transparent;
+}
+
+.hamburger.open::before {
+  transform: rotate(45deg);
+}
+
+.hamburger.open::after {
+  transform: rotate(-45deg);
+}
+
 /* Base button hover unification */
 .nav-links .btn:hover {
   transform: translateY(-1px);
@@ -689,6 +739,13 @@ body {
 }
 
 @media (max-width: 768px) {
+
+  /* Site Layout */
+  .main-content {
+    margin: 20px auto;
+    padding: 0 16px;
+  }
+
   .hero {
     flex-direction: column;
     text-align: center;
@@ -700,19 +757,68 @@ body {
     margin: 0 auto;
   }
 
+  .hero .intro h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero .intro p {
+    font-size: 1rem;
+  }
+
+  .btn-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-row .btn {
+    width: 100%;
+    text-align: center;
+  }
+
   .site-footer .container {
     flex-direction: column;
     gap: 16px;
     text-align: center;
   }
 
-  .nav-links {
-    display: none;
-    /* Mobile menu logic would go here ideally */
+  /* Mobile Navigation */
+  .menu-toggle {
+    display: block;
   }
 
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    padding: 80px 24px 24px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 150;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);
+  }
+
+  .nav-links .btn {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+  }
+
+  /* Grids & Cards */
+  .grid,
   .cert-grid {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .cert-header {
