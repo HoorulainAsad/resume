@@ -41,12 +41,16 @@ body {
   background-attachment: fixed;
   color: var(--text-main);
   line-height: 1.6;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
 }
 
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  /* Double protection */
 }
 
 .main-content {
@@ -708,35 +712,102 @@ body {
   box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.3);
 }
 
-.delete-project-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  color: #ef4444;
-  font-weight: 700;
-  font-size: 1.25rem;
-  line-height: 1;
+/* LinkedIn Style Certification Card */
+.cert-card-linkedin {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cert-card-linkedin:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cert-thumbnail {
+  width: 60px;
+  /* Slightly larger for image preview */
+  height: 60px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.cert-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.cert-preview-img:hover {
+  transform: scale(1.1);
+}
+
+.placeholder-logo {
+  width: 100%;
+  height: 100%;
+  background-color: #f3f4f6;
+  color: #6b7280;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s;
-  z-index: 10;
-  padding-bottom: 2px;
-  /* Visual alignments */
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 4px;
 }
 
-.delete-project-btn:hover {
-  transform: scale(1.1);
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.cert-details {
+  flex: 1;
 }
+
+.cert-details h3 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.cert-details .issuer {
+  margin: 0 0 2px;
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.cert-details .date {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.cert-actions-btns {
+  margin-top: 8px;
+}
+
+.view-credential-btn {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--accent-primary);
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.view-credential-btn:hover {
+  background-color: #f3e8ff;
+  /* Light purple bg */
+  text-decoration: none;
+}
+
 
 @media (max-width: 768px) {
 

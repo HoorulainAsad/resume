@@ -1,231 +1,143 @@
 import React, { useState, useEffect } from 'react'
 import ProjectCard from '../components/projectcard'
-
-const defaultProjects = [
-  {
-    id: 1,
-    title: 'Project Alpha',
-    description: 'A revolutionary app that helps users track their productivity with pastel charts.',
-    technologies: ['React', 'Node.js', 'Vite'],
-    liveLink: '#',
-    image: '',
-  },
-  {
-    id: 2,
-    title: 'Project Beta',
-    description: 'An interactive mapping dashboard for visualizing global climate data.',
-    technologies: ['Leaflet', 'D3.js', 'GeoJSON'],
-    liveLink: '#',
-    image: '',
-  },
-  {
-    id: 3,
-    title: 'Project Gamma',
-    description: 'A social photo sharing platform focused on minimalist aesthetics.',
-    technologies: ['React', 'Firebase', 'Tailwind'],
-    liveLink: '#',
-    image: '',
-  },
-  {
-    id: 4,
-    title: 'Project Delta',
-    description: 'Command line tool for scaffolding pastel-themed React applications.',
-    technologies: ['Node.js', 'Ink', 'CLI'],
-    liveLink: '#',
-    image: '',
-  },
-  {
-    id: 5,
-    title: 'Project Epsilon',
-    description: 'E-commerce storefront template with dynamic cart functionality.',
-    technologies: ['Next.js', 'Stripe', 'Zustand'],
-    liveLink: '#',
-    image: '',
-  },
-  {
-    id: 6,
-    title: 'Project Zeta',
-    description: 'Real-time collaborative whiteboard for remote teams.',
-    technologies: ['Socket.io', 'Canvas API', 'Express'],
-    liveLink: '#',
-    image: '',
-  }
-]
+import { getProjects, saveProjects } from '../utils/persistence'
+import { useAdmin } from '../context/AdminContext'
 
 export default function Projects() {
-  const [projects, setProjects] = useState([])
+  const [projectsList, setProjectsList] = useState([])
+  const { isAdmin } = useAdmin()
   const [showForm, setShowForm] = useState(false)
-  const [formData, setFormData] = useState({
+
+  // Form State
+  const [newProject, setNewProject] = useState({
     title: '',
     description: '',
     technologies: '',
     liveLink: '',
-    imagePreview: null
+    image: ''
   })
 
   useEffect(() => {
-    const saved = localStorage.getItem('projects')
-    if (saved) {
-      setProjects(JSON.parse(saved))
-    } else {
-      setProjects(defaultProjects)
-    }
+    setProjectsList(getProjects())
   }, [])
 
-  useEffect(() => {
-    if (projects.length > 0 || localStorage.getItem('projects')) {
-      localStorage.setItem('projects', JSON.stringify(projects))
-    }
-  }, [projects])
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0]
-    if (!file) return
-
-    if (file.size > 2 * 1024 * 1024) {
-      alert('Image too large (max 2MB)')
-      return
-    }
-
-    const reader = new FileReader()
-    reader.onloadend = () => {
-      setFormData({
-        ...formData,
-        imagePreview: reader.result
-      })
-    }
-    reader.readAsDataURL(file)
-  }
-
-  const handleSubmit = (e) => {
+  const handleAddProject = (e) => {
     e.preventDefault()
-
-    const newProject = {
+    const projectToAdd = {
+      ...newProject,
       id: Date.now(),
-      title: formData.title,
-      description: formData.description,
-      technologies: formData.technologies.split(',').map(t => t.trim()).filter(t => t),
-      liveLink: formData.liveLink,
-      image: formData.imagePreview
+      technologies: newProject.technologies.split(',').map(t => t.trim())
     }
-
-    setProjects([newProject, ...projects])
-
-    setFormData({
-      title: '',
-      description: '',
-      technologies: '',
-      liveLink: '',
-      imagePreview: null
-    })
+    const updatedList = [...projectsList, projectToAdd]
+    setProjectsList(updatedList)
+    saveProjects(updatedList)
     setShowForm(false)
+    setNewProject({ title: '', description: '', technologies: '', liveLink: '', image: '' })
   }
 
-  const handleDelete = (id) => {
+  const handleDeleteProject = (id) => {
     if (window.confirm('Delete this project?')) {
-      const updated = projects.filter(p => p.id !== id)
-      setProjects(updated)
+      const updatedList = projectsList.filter(p => p.id !== id)
+      setProjectsList(updatedList)
+      saveProjects(updatedList)
     }
   }
 
   return (
     <div>
       <section className="section">
-        <div className="cert-header"> {/* Reusing flex header style */}
+        <div className="cert-header">
           <div>
             <h2>My Work</h2>
-            <p className="muted">Here are some of the projects I've updated.</p>
+            <p className="muted">Here are some of the projects I've built.</p>
           </div>
-          <button className="btn" onClick={() => setShowForm(!showForm)}>
-            {showForm ? 'Cancel' : '+ Add Project'}
-          </button>
+          {isAdmin && (
+            <button className="btn" onClick={() => setShowForm(!showForm)}>
+              {showForm ? 'Cancel' : 'Add Project'}
+            </button>
+          )}
         </div>
 
-        {showForm && (
-          <div className="cert-form-container"> {/* Reusing container style */}
-            <form onSubmit={handleSubmit} className="cert-form">
+        {isAdmin && showForm && (
+          <div className="cert-form-container">
+            <form onSubmit={handleAddProject} className="cert-form">
               <div className="form-group">
-                <label>Project Name</label>
+                <label>Project Title</label>
                 <input
                   type="text"
+                  value={newProject.title}
+                  onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
                   required
-                  value={formData.title}
-                  onChange={e => setFormData({ ...formData, title: e.target.value })}
-                  placeholder="e.g. Portfolio Website"
                 />
               </div>
-
               <div className="form-group">
                 <label>Description</label>
-                <textarea
+                <input
+                  type="text"
+                  value={newProject.description}
+                  onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
                   required
-                  rows="3"
-                  value={formData.description}
-                  onChange={e => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Brief description of the project..."
-                  style={{
-                    padding: '12px 16px',
-                    border: '2px solid #e2e8f0',
-                    borderRadius: '12px',
-                    fontFamily: 'inherit',
-                    resize: 'vertical'
-                  }}
                 />
               </div>
-
               <div className="form-group">
                 <label>Technologies (comma separated)</label>
                 <input
                   type="text"
-                  required
-                  value={formData.technologies}
-                  onChange={e => setFormData({ ...formData, technologies: e.target.value })}
+                  value={newProject.technologies}
+                  onChange={(e) => setNewProject({ ...newProject, technologies: e.target.value })}
                   placeholder="React, CSS, Node.js"
                 />
               </div>
-
               <div className="form-group">
-                <label>Live Link URL</label>
+                <label>Live URL</label>
                 <input
-                  type="url"
-                  required
-                  value={formData.liveLink}
-                  onChange={e => setFormData({ ...formData, liveLink: e.target.value })}
-                  placeholder="https://..."
+                  type="text"
+                  value={newProject.liveLink}
+                  onChange={(e) => setNewProject({ ...newProject, liveLink: e.target.value })}
                 />
               </div>
-
               <div className="form-group">
-                <label>Project Image (Optional)</label>
-                <div className="file-upload-area">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                  />
-                </div>
-                {formData.imagePreview && (
-                  <div className="file-preview">
-                    <img src={formData.imagePreview} alt="Preview" />
-                  </div>
-                )}
+                <label>Image Path (e.g. /assets/p1.png)</label>
+                <input
+                  type="text"
+                  value={newProject.image}
+                  onChange={(e) => setNewProject({ ...newProject, image: e.target.value })}
+                />
               </div>
-
-              <button type="submit" className="btn">Save Project</button>
+              <button type="submit" className="btn submit-btn">Save Project</button>
             </form>
           </div>
         )}
 
         <div className="grid">
-          {projects.map((project) => (
+          {projectsList.map((project) => (
             <div key={project.id} style={{ position: 'relative' }}>
               <ProjectCard project={project} />
-              <button
-                onClick={() => handleDelete(project.id)}
-                className="delete-project-btn"
-              >
-                ×
-              </button>
+              {isAdmin && (
+                <button
+                  onClick={() => handleDeleteProject(project.id)}
+                  style={{
+                    position: 'absolute',
+                    top: '10px',
+                    right: '10px',
+                    backgroundColor: '#ff4d4d',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '30px',
+                    height: '30px',
+                    cursor: 'pointer',
+                    zIndex: 10,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 'bold'
+                  }}
+                  title="Delete Project"
+                >
+                  ×
+                </button>
+              )}
             </div>
           ))}
         </div>

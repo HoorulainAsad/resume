@@ -7,22 +7,25 @@ import Home from './pages/home'
 import About from './pages/about'
 import Projects from './pages/project'
 import Certifications from './pages/certifications'
+import { AdminProvider } from './context/AdminContext'
 
 export default function App() {
   return (
-    <Router basename={import.meta.env.BASE_URL}>
-      <div className="app">
-        <Navbar />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/certifications" element={<Certifications />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <AdminProvider>
+      <Router basename={import.meta.env.BASE_URL}>
+        <div className="app">
+          <Navbar />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/certifications" element={<Certifications />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </AdminProvider>
   )
 }
