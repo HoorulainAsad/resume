@@ -52,23 +52,9 @@ export default function Projects() {
             <p className="muted">Here are some of the projects I've built.</p>
           </div>
           {isAdmin && (
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <button
-                className="btn"
-                onClick={() => {
-                  const json = JSON.stringify(projectsList, null, 2);
-                  navigator.clipboard.writeText(json);
-                  alert('Projects data copied to clipboard! Please send this to me.');
-                  console.log('Projects JSON:', json);
-                }}
-                style={{ backgroundColor: '#6c5ce7', color: 'white' }}
-              >
-                Export Projects Data
-              </button>
-              <button className="btn" onClick={() => setShowForm(!showForm)}>
-                {showForm ? 'Cancel' : 'Add Project'}
-              </button>
-            </div>
+            <button className="btn" onClick={() => setShowForm(!showForm)}>
+              {showForm ? 'Cancel' : 'Add Project'}
+            </button>
           )}
         </div>
 

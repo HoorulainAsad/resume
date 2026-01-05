@@ -51,23 +51,9 @@ export default function Certifications() {
                         <p className="muted">Licenses and certifications I have earned.</p>
                     </div>
                     {isAdmin && (
-                        <div style={{ display: 'flex', gap: '10px' }}>
-                            <button
-                                className="btn"
-                                onClick={() => {
-                                    const json = JSON.stringify(certsList, null, 2);
-                                    navigator.clipboard.writeText(json);
-                                    alert('Certifications data copied to clipboard! Please send this to me.');
-                                    console.log('Certifications JSON:', json);
-                                }}
-                                style={{ backgroundColor: '#6c5ce7', color: 'white' }}
-                            >
-                                Export Certifications
-                            </button>
-                            <button className="btn" onClick={() => setShowForm(!showForm)}>
-                                {showForm ? 'Cancel' : 'Add Certification'}
-                            </button>
-                        </div>
+                        <button className="btn" onClick={() => setShowForm(!showForm)}>
+                            {showForm ? 'Cancel' : 'Add Certification'}
+                        </button>
                     )}
                 </div>
 
