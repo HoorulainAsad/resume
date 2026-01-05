@@ -1,211 +1,189 @@
 export const projects = [
     {
-        id: 1,
-        title: 'Project Alpha',
-        description: 'A revolutionary app that helps users track their productivity with pastel charts.',
-        technologies: ['React', 'Node.js', 'Vite'],
-        liveLink: '#',
-        image: '', // Add image path like '/assets/project1.png'
+        "title": "Ecommerce Site",
+        "description": "An online fashion clothing brand website showcasing formal, party wear, and bridal collections. Built to display products, categories, and new arrivals in a user-friendly layout.",
+        "technologies": [
+            "PHP",
+            "HTML",
+            "CSS",
+            "Bootstrap",
+            "MYSQL",
+            "XAMPP",
+            "Javascript"
+        ],
+        "liveLink": "https://hooro-ecommerce.fwh.is/",
+        "image": "/assets/thumbnail.png",
+        "id": 1767131015596
     },
     {
-        id: 2,
-        title: 'Project Beta',
-        description: 'An interactive mapping dashboard for visualizing global climate data.',
-        technologies: ['Leaflet', 'D3.js', 'GeoJSON'],
-        liveLink: '#',
-        image: '',
+        "title": "Image Gallery (Unsplash API) ",
+        "description": "An image gallery application using the Unsplash API to fetch and display high-quality photos. Includes search and responsive image layout features.",
+        "technologies": [
+            "React",
+            "APIs",
+            "CSS",
+            "Javascript",
+            "Html",
+            "Vite"
+        ],
+        "liveLink": "https://hoorulainasad.github.io/image-gallery/",
+        "image": "/assets/rose.png",
+        "id": 1767131616749
     },
     {
-        id: 3,
-        title: 'Project Gamma',
-        description: 'A social photo sharing platform focused on minimalist aesthetics.',
-        technologies: ['React', 'Firebase', 'Tailwind'],
-        liveLink: '#',
-        image: '',
+        "title": "Internee.pk clone (Not Responsive)",
+        "description": "A clone of the Internee.pk platform designed to explore internship listings and basic site structure. Focused on UI layout and content organization.",
+        "technologies": [
+            "React",
+            "CSS",
+            "Tailwind",
+            "JS",
+            "Vite",
+            "HTML"
+        ],
+        "liveLink": "https://hoorulainasad.github.io/internee-clone/",
+        "image": "/assets/clone.png",
+        "id": 1767131746749
     },
     {
-        id: 4,
-        title: 'Project Delta',
-        description: 'Command line tool for scaffolding pastel-themed React applications.',
-        technologies: ['Node.js', 'Ink', 'CLI'],
-        liveLink: '#',
-        image: '',
+        "title": "Sticky notes (like Google Keep)",
+        "description": "A simple web app to create, edit, and delete sticky notes. Useful for managing daily tasks and quick reminders.",
+        "technologies": [
+            "React",
+            "HTML",
+            "Css",
+            "Typescript",
+            "JS"
+        ],
+        "liveLink": "https://hoorulainasad.github.io/stickynotes/",
+        "image": "/assets/notes.png",
+        "id": 1767131952601
     },
     {
-        id: 5,
-        title: 'Project Epsilon',
-        description: 'E-commerce storefront template with dynamic cart functionality.',
-        technologies: ['Next.js', 'Stripe', 'Zustand'],
-        liveLink: '#',
-        image: '',
-    },
-    {
-        id: 6,
-        title: 'Project Zeta',
-        description: 'Real-time collaborative whiteboard for remote teams.',
-        technologies: ['Socket.io', 'Canvas API', 'Express'],
-        liveLink: '#',
-        image: '',
-    },
-    {
-        id: 7,
-        title: 'Project Eta',
-        description: 'A placeholder for your seventh amazing project.',
-        technologies: ['React', 'CSS'],
-        liveLink: '#',
-        image: '',
-    },
-    {
-        id: 8,
-        title: 'Project Theta',
-        description: 'A placeholder for your eighth amazing project.',
-        technologies: ['React', 'CSS'],
-        liveLink: '#',
-        image: '',
-    },
-    {
-        id: 9,
-        title: 'Project Iota',
-        description: 'A placeholder for your ninth amazing project.',
-        technologies: ['React', 'CSS'],
-        liveLink: '#',
-        image: '',
-    },
-    {
-        id: 10,
-        title: 'Project Kappa',
-        description: 'A placeholder for your tenth amazing project.',
-        technologies: ['React', 'CSS'],
-        liveLink: '#',
-        image: '',
+        "title": "AI Resume Analyzer",
+        "description": "An AI-based tool that analyzes resumes and highlights skills, strengths, and improvements. Helps users understand how well their resume matches job requirements.",
+        "technologies": [
+            "HTML",
+            "CSS",
+            "Javascript"
+        ],
+        "liveLink": "https://hoorulainasad.github.io/AIResume-Analyzer/",
+        "image": "/assets/resume.png",
+        "id": 1767132078269
     }
 ];
 
 export const certifications = [
     {
-        id: 1,
-        title: 'Certified React Developer',
-        issuer: 'Meta',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: '' // Path to certificate image in assets
+        "title": "CPA: Programming Essentials in C++",
+        "issuer": "Cisco Networking Acadmey",
+        "date": "2024",
+        "link": "",
+        "image": "/assets/C++.png",
+        "id": 1767128231555
     },
     {
-        id: 2,
-        title: 'AWS Cloud Practitioner',
-        issuer: 'Amazon Web Services',
-        date: '2023',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "Introduction to Html, Css & Javascript",
+        "issuer": "IBM & Coursera",
+        "date": "2025",
+        "link": "",
+        "image": "/assets/html.png",
+        "id": 1767129209589
     },
     {
-        id: 3,
-        title: 'Google Data Analytics',
-        issuer: 'Google',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "Javascript Programming Essentials",
+        "issuer": "IBM & Coursera",
+        "date": "2025",
+        "link": "",
+        "image": "/assets/js.png",
+        "id": 1767129271944
     },
     {
-        id: 4,
-        title: 'Microsoft Azure Fundamentals',
-        issuer: 'Microsoft',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "Networking Essentials",
+        "issuer": "Cisco Networking Academy",
+        "date": "2024",
+        "link": "",
+        "image": "/assets/Networking Essentials.png",
+        "id": 1767129351598
     },
     {
-        id: 5,
-        title: 'Certification 5',
-        issuer: 'Issuer Name',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "Git & GitHub",
+        "issuer": "IBM & Coursera",
+        "date": "2025",
+        "link": "",
+        "image": "/assets/ibm.png",
+        "id": 1767129406720
     },
     {
-        id: 6,
-        title: 'Certification 6',
-        issuer: 'Issuer Name',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "Developing Front-end Apps with React",
+        "issuer": "Coursera & IBM",
+        "date": "2025",
+        "link": "",
+        "image": "/assets/developingfrontend.png",
+        "id": 1767129498463
     },
     {
-        id: 7,
-        title: 'Certification 7',
-        issuer: 'Issuer Name',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "Get Started with Cloud Native, Dev ops , Agile and NoSQL",
+        "issuer": "IBM & Coursera",
+        "date": "2024",
+        "link": "",
+        "image": "/assets/devops.png",
+        "id": 1767129714239
     },
     {
-        id: 8,
-        title: 'Certification 8',
-        issuer: 'Issuer Name',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "Developing Backend apps with Node.js and Express",
+        "issuer": "IBM & Coursera",
+        "date": "2025",
+        "link": "",
+        "image": "/assets/Developingbackend.png",
+        "id": 1767129796330
     },
     {
-        id: 9,
-        title: 'Certification 9',
-        issuer: 'Issuer Name',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "Software Developer Career guide and Interview Preperation",
+        "issuer": "IBM & Coursera",
+        "date": "2025",
+        "link": "",
+        "image": "/assets/career.png",
+        "id": 1767129860408
     },
     {
-        id: 10,
-        title: 'Certification 10',
-        issuer: 'Issuer Name',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "Node.js & MongoDB : Developing Backend Database Application",
+        "issuer": "IBM & Coursera",
+        "date": "2025",
+        "link": "",
+        "image": "/assets/node.png",
+        "id": 1767129973252
     },
     {
-        id: 11,
-        title: 'Certification 11',
-        issuer: 'Issuer Name',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "IBM Fullstack Javascript Developer",
+        "issuer": "IBM & Coursera",
+        "date": "2025",
+        "link": "",
+        "image": "/assets/fullstack.png",
+        "id": 1767130031774
     },
     {
-        id: 12,
-        title: 'Certification 12',
-        issuer: 'Issuer Name',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "Javascript Full Stack Capstone project",
+        "issuer": "IBM & Coursera",
+        "date": "2025",
+        "link": "",
+        "image": "/assets/jscapstone.png",
+        "id": 1767130126316
     },
     {
-        id: 13,
-        title: 'Certification 13',
-        issuer: 'Issuer Name',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "Freelance Training Certificate",
+        "issuer": "Digiskills",
+        "date": "2024",
+        "link": "",
+        "image": "/assets/freelance.png",
+        "id": 1767130200133
     },
     {
-        id: 14,
-        title: 'Certification 14',
-        issuer: 'Issuer Name',
-        date: '2024',
-        link: '#',
-        thumbnail: '',
-        image: ''
+        "title": "Graphic Designing Training Certificate",
+        "issuer": "Digiskills",
+        "date": "2024",
+        "link": "",
+        "image": "/assets/gd.png",
+        "id": 1767130251443
     }
 ];
