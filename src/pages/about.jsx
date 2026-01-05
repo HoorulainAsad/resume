@@ -1,21 +1,32 @@
 import React from 'react'
 
-export default function About(){
+export default function About() {
   return (
     <div>
       <section className="section">
         <h2>About / Contact</h2>
-        <p className="muted">Replace this with your contact details. Example:</p>
+        <p className="muted">This is my contact details section. Feel free to approach for professional or personal inquiries.</p>
         <ul>
-          <li>Email: you@example.com</li>
-          <li>Phone: +1 555 555 5555</li>
-          <li>Location: City, Country</li>
+          <li>
+            <a href="mailto:itshooroasad@gmail.com">
+              itshooroasad@gmail.com
+            </a>
+          </li>
+
+          <li>
+            <a href="https://www.linkedin.com/in/hoorulain-asad-b69924396/" target="_blank">
+              LinkedIn Profile
+            </a>
+          </li>
+
+          <li>Location: Lahore, Pakistan</li>
+
         </ul>
       </section>
 
       <section className="section">
         <h2>Bio</h2>
-        <p className="muted">Short bio placeholder. Swap with your full bio and background.</p>
+        <p className="muted">“I’m a passionate and curious developer who enjoys building clean, user-friendly web applications. I love learning new technologies and turning ideas into practical digital solutions.” 😊</p>
       </section>
     </div>
   )
