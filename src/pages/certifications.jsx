@@ -1,174 +1,97 @@
 import React, { useState, useEffect } from 'react'
-import { getCertifications, saveCertifications } from '../utils/persistence'
-import { useAdmin } from '../context/AdminContext'
+import { motion } from 'framer-motion'
+import { getCertifications } from '../utils/persistence'
 import { getAssetPath } from '../utils/assets'
 
 export default function Certifications() {
     const [certsList, setCertsList] = useState([])
-    const { isAdmin } = useAdmin()
-    const [showForm, setShowForm] = useState(false)
-
-    // Form State
-    const [newCert, setNewCert] = useState({
-        title: '',
-        issuer: '',
-        date: '',
-        link: '',
-        image: ''
-    })
+    const [isHovered, setIsHovered] = useState(false)
 
     useEffect(() => {
         setCertsList(getCertifications())
     }, [])
 
-    const handleAddCert = (e) => {
-        e.preventDefault()
-        const certToAdd = {
-            ...newCert,
-            id: Date.now()
-        }
-        const updatedList = [...certsList, certToAdd]
-        setCertsList(updatedList)
-        saveCertifications(updatedList)
-        setShowForm(false)
-        setNewCert({ title: '', issuer: '', date: '', link: '', image: '' })
-    }
-
-    const handleDeleteCert = (id) => {
-        if (window.confirm('Delete this certification?')) {
-            const updatedList = certsList.filter(c => c.id !== id)
-            setCertsList(updatedList)
-            saveCertifications(updatedList)
-        }
-    }
-
     return (
-        <div>
-            <section className="section">
-                <div className="cert-header">
-                    <div>
-                        <h2>My Certifications</h2>
-                        <p className="muted">Licenses and certifications I have earned.</p>
-                    </div>
-                    {isAdmin && (
-                        <button className="btn" onClick={() => setShowForm(!showForm)}>
-                            {showForm ? 'Cancel' : 'Add Certification'}
-                        </button>
-                    )}
-                </div>
+        <div className="section" style={{ minHeight: '100vh', overflow: 'hidden' }}>
+            <motion.h2
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+            >
+                Gallery
+            </motion.h2>
 
-                {isAdmin && showForm && (
-                    <div className="cert-form-container">
-                        <form onSubmit={handleAddCert} className="cert-form">
-                            <div className="form-group">
-                                <label>Certification Name</label>
-                                <input
-                                    type="text"
-                                    value={newCert.title}
-                                    onChange={(e) => setNewCert({ ...newCert, title: e.target.value })}
-                                    required
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Issuer</label>
-                                <input
-                                    type="text"
-                                    value={newCert.issuer}
-                                    onChange={(e) => setNewCert({ ...newCert, issuer: e.target.value })}
-                                    required
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Date</label>
-                                <input
-                                    type="text"
-                                    value={newCert.date}
-                                    onChange={(e) => setNewCert({ ...newCert, date: e.target.value })}
-                                    placeholder="e.g. 2024"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Credential Link (optional)</label>
-                                <input
-                                    type="text"
-                                    value={newCert.link}
-                                    onChange={(e) => setNewCert({ ...newCert, link: e.target.value })}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Certificate Image Path (e.g. /assets/cert1.png)</label>
-                                <input
-                                    type="text"
-                                    value={newCert.image}
-                                    onChange={(e) => setNewCert({ ...newCert, image: e.target.value })}
-                                    required
-                                />
-                            </div>
-                            <button type="submit" className="btn submit-btn">Save Certification</button>
-                        </form>
-                    </div>
-                )}
-
-                {certsList.length === 0 ? (
-                    <div className="empty-state">
-                        <p>No certifications to display yet.</p>
-                    </div>
-                ) : (
-                    <div className="cert-grid">
-                        {certsList.map((cert) => (
-                            <div key={cert.id} className="cert-card-linkedin" style={{ position: 'relative' }}>
-                                <div className="cert-thumbnail">
-                                    {cert.image ? (
-                                        <a href={getAssetPath(cert.image)} target="_blank" rel="noopener noreferrer">
-                                            <img src={getAssetPath(cert.image)} alt={cert.title} className="cert-preview-img" />
-                                        </a>
-                                    ) : (
-                                        <div className="placeholder-logo">
-                                            {cert.issuer.charAt(0)}
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="cert-details">
-                                    <h3>{cert.title}</h3>
-                                    <p className="issuer">{cert.issuer}</p>
-                                    <p className="date">Issued {cert.date}</p>
-                                    <div className="cert-actions-btns">
-                                        <a href={getAssetPath(cert.image || cert.link)} target="_blank" rel="noopener noreferrer" className="view-credential-btn">
-                                            View Certificate
-                                        </a>
-                                    </div>
-                                </div>
-                                {isAdmin && (
-                                    <button
-                                        onClick={() => handleDeleteCert(cert.id)}
-                                        style={{
-                                            position: 'absolute',
-                                            top: '10px',
-                                            right: '10px',
-                                            backgroundColor: '#ff4d4d',
-                                            color: 'white',
-                                            border: 'none',
-                                            borderRadius: '50%',
-                                            width: '24px',
-                                            height: '24px',
-                                            cursor: 'pointer',
-                                            zIndex: 10,
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            fontWeight: 'bold',
-                                            fontSize: '12px'
-                                        }}
-                                        title="Delete Certification"
-                                    >
-                                        ×
-                                    </button>
+            <motion.div 
+                className="stacked-cards-container"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                style={{ perspective: '1000px' }}
+            >
+                {certsList.map((cert, index) => {
+                    const rotation = isHovered ? (index - (certsList.length - 1) / 2) * 12 : 0;
+                    const xOffset = isHovered ? (index - (certsList.length - 1) / 2) * 80 : 0;
+                    
+                    return (
+                        <motion.div
+                            key={cert.id}
+                            className="stacked-card"
+                            initial={{ x: 0, rotate: 0 }}
+                            animate={{ 
+                                rotate: rotation,
+                                x: xOffset,
+                                zIndex: isHovered ? index : 1
+                            }}
+                            whileHover={{ 
+                                scale: 1.1, 
+                                y: -50, 
+                                zIndex: 1000,
+                                transition: { duration: 0.3 }
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: 'spring', stiffness: 120, damping: 20 }}
+                            style={{ 
+                                cursor: 'pointer',
+                                pointerEvents: 'auto'
+                            }}
+                        >
+                            <div style={{ width: '100%', height: '220px', backgroundColor: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                {cert.image ? (
+                                    <img src={getAssetPath(cert.image)} alt={cert.title} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                                ) : (
+                                    <span className="muted">No Preview</span>
                                 )}
                             </div>
-                        ))}
-                    </div>
-                )}
-            </section>
+                            <div style={{ padding: '20px', textAlign: 'left', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                <h3 style={{ fontSize: '1.1rem', marginBottom: '5px', color: 'var(--accent-color)' }}>{cert.title}</h3>
+                                <p className="muted" style={{ fontSize: '0.85rem', marginBottom: '10px' }}>{cert.issuer}</p>
+                                <a 
+                                    href={cert.image ? getAssetPath(cert.image) : '#'} 
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                    style={{ 
+                                        display: 'block',
+                                        marginTop: 'auto',
+                                        textDecoration: 'none', 
+                                        color: 'var(--bg-color)',
+                                        backgroundColor: 'var(--accent-color)',
+                                        padding: '10px',
+                                        borderRadius: '8px',
+                                        fontSize: '0.8rem',
+                                        fontWeight: '900',
+                                        textAlign: 'center',
+                                        textTransform: 'uppercase',
+                                        position: 'relative',
+                                        zIndex: 1001
+                                    }}
+                                >
+                                    Open Certificate
+                                </a>
+                            </div>
+                        </motion.div>
+                    );
+                })}
+            </motion.div>
         </div>
     )
 }

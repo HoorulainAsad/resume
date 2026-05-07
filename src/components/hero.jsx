@@ -1,20 +1,41 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 export default function Hero() {
   return (
-    <section className="hero section">
-      <div className="photo-container">
-        <img src={`${import.meta.env.BASE_URL}assets/profile.jpeg`} alt="Profile" className="photo" />
-      </div>
-      <div className="intro">
-        <h1>Hoorulain Asad</h1>
-        <p className="muted">Hello, I'm Hoorulain Asad. I am a dedicated student with a growing skill set in web development and a strong interest in building modern, responsive applications. I am actively seeking opportunities to apply my knowledge, enhance my technical abilities, and grow professionally. Please feel free to check out my site to explore the projects i have made and to get to know me better.</p>
-        <div className="btn-row">
-          <Link className="btn" to="/">Home</Link>
-          <Link className="btn" to="/projects">Projects</Link>
-          <Link className="btn" to="/about">About</Link>
+    <section className="hero">
+      <div className="hero-bg-text">RESUME</div>
+      
+      <div className="spinning-text-container">
+        <div className="spinning-text">
+          <svg viewBox="0 0 100 100">
+            <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+            <text>
+              <textPath xlinkHref="#circlePath" style={{ fontSize: '7.5px', fontFamily: 'var(--font-body)', fontWeight: '900', letterSpacing: '2.5px' }}>
+                HOORULAIN ASAD • CREATIVE DEVELOPER • HOORULAIN ASAD • 
+              </textPath>
+            </text>
+          </svg>
         </div>
+      </div>
+
+      <h1>HOORULAIN ASAD</h1>
+      
+      <div className="intro">
+        <p>What makes my work unique is the combination of technical expertise and a personal touch.</p>
+      </div>
+
+      <motion.div 
+        className="photo-container"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <img src={`${import.meta.env.BASE_URL}assets/profile.jpeg`} alt="Profile" className="photo" />
+      </motion.div>
+
+      <div className="intro-right">
+        <p>Immerse yourself in a world where each line of code tells a story, capturing the beauty of the ordinary and the extraordinary.</p>
       </div>
     </section>
   )

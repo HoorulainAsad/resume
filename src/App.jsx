@@ -7,11 +7,11 @@ import Home from './pages/home'
 import About from './pages/about'
 import Projects from './pages/project'
 import Certifications from './pages/certifications'
-import { AdminProvider } from './context/AdminContext'
+
 
 export default function App() {
   return (
-    <AdminProvider>
+
       <Router basename={import.meta.env.BASE_URL}>
         <div className="app">
           <Navbar />
@@ -26,6 +26,6 @@ export default function App() {
           <Footer />
         </div>
       </Router>
-    </AdminProvider>
+
   )
 }
